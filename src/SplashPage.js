@@ -1,25 +1,19 @@
 import React, { useState, useEffect } from 'react';
-//import { keyframes, Global } from '@emotion/core';
-import styled from '@emotion/styled'
-import Footer from './Footer.js'
+import styled from '@emotion/styled';
+import Footer from './rocks/Footer.js';
+import Header from './rocks/Header.js';
+//import FOEButton from './rocks/FOEButton.js';
 
 import settings from './settings';
-import primitivetext from './primitive.svg';
-import primitiveicon from './punkyicon.svg';
+import primitiveicon from './img/punkyicon.svg';
 
 function SplashPage() {
 
-  // Declare a new state variable, which we'll call "count"
-  
-
-  //console.log(buttons);
-
-  const mode = 'work';
   const color = settings.buttoncolor;
-  const profilelist = ('work' === mode) ? settings.profiles.work : settings.profiles.play;
-
+  const homebuttons = [
+    { "id": "home1", "color": color.white, "checked": false, "label": "sknow.it" }
+  ];
   const workbuttons = [
-    { "id": "work1", "color": color.white, "checked": false, "label": "sknow.it" },
     { "id": "work2", "color": color.green, "checked": false, "label": "Primitive Digital" },
     { "id": "work3", "color": color.cyan, "checked": false, "label": "Primitive Hosting" }
   ];
@@ -27,8 +21,11 @@ function SplashPage() {
     { "id": "play4", "color": color.orange, "checked": false, "label": "Nice2B.me" }
   ];
 
+  
+  const [mode, setMode] = useState('work');
   const [buttons, setButtons] = useState(workbuttons);
 
+  const profilelist = ('work' === mode) ? settings.profiles.work : settings.profiles.play;
 
   useEffect(() => {
     //setButtons(workbuttons);
@@ -37,27 +34,68 @@ function SplashPage() {
 
   const handleClick = (e) => {
     //setDisplay(display.button.map(display.button => (display.button[id] === id ? { ...button, done } : button)));
-    console.log('e= ' + e)
-    console.log('id= ' + e.substring(4))
+    
+    console.log('num= ' + e.substring(4));
+    console.log(buttons);
+    const btnID = e;
+    const btnType = e.substring(0,4);
+
+    console.log('btnID= ' + btnID);
+
+    if ('play'===btnType) {
+      setMode(btnType);
+    }
+    else {
+      setMode('work');
+    }
+
+    //{ firstName: 'Jason' }
+
+
 
     /*
+    handleClick = () => {
+      this.setState((prevState) => ({
+        counter: prevState.counter + 1
+      }));
+    };
+    
 
         prevState => ({
       [name]: !prevState[name]
     }),
 
     */
-    setButtons(workbuttons);
+    //setButtons(workbuttons);
   };
 
-  
+
   return (
     <StyledSplashPage>
 
+      <Header />
+
       <Container>
 
-        <Row>
-          {/* check for data */}
+      <Row>
+          {homebuttons && (
+            homebuttons.map((button) => {
+              return (
+                <Col key={button.id}>
+                  <FOEButton color={button.color}>
+                    <button
+                      onClick={({ target }) => handleClick(target.id)}
+                      label={button.label}
+                      id={button.id}>
+                    </button>
+                    <div className="bg"></div>
+                  </FOEButton>
+                </Col>);
+            })
+          )}
+        </Row>
+
+      <Row>
           {workbuttons && (
             workbuttons.map((button) => {
               return (
@@ -120,10 +158,53 @@ function SplashPage() {
 export default SplashPage;
 
 
-const Profiles = styled.div`
+const StyledSplashPage = styled.div`
+  postition: relative;
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100vw;
+  overflow-y: auto;
+  overflow-x: hidden;
 
+  .content{
+    z-index: 10;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    opacity: 0;
+  }
+`;
+
+const Container = styled.div`
   position: relative;
-  z-index: 3;
+  vertical-align: middle;
+`;
+const Row = styled.div`
+  display: flex;
+  width: 100%;
+
+  justify-content: center;
+  justify-items: center;
+`;
+const Col = styled.div`
+  padding: 10px;
+`;
+
+
+
+
+
+
+
+
+
+
+
+
+const Profiles = styled.div`
+  padding: 1.5rem;
+  position: relative;
+  z-index: 4;
 
   @media screen and (min-width: 768px) {
     position: absolute;
@@ -131,7 +212,6 @@ const Profiles = styled.div`
     left: 1.5rem;
     z-index: 3;
   }
-
 
 .profile {
   color: #a2a2a2;
@@ -169,22 +249,6 @@ const Profiles = styled.div`
 }
 `;
 
-const Container = styled.div`
-  width: 100%;
-  height: 100%;
-  position: relative;
-  vertical-align: middle;
-`;
-const Row = styled.div`
-  display: flex;
-  width: 100%;
-
-  justify-content: center;
-  justify-items: center;
-`;
-const Col = styled.div`
-  padding: 10px;
-`;
 
 
 const FOEButton = styled.div`
@@ -226,7 +290,10 @@ const FOEButton = styled.div`
     transition: .4s;
     z-index: -10;
   }
-
+  button#work1::before {
+    background-color: #fbf1f3;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='126' height='84' viewBox='0 0 126 84'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%231e0d10' fill-opacity='0.06'%3E%3Cpath d='M126 83v1H0v-2h40V42H0v-2h40V0h2v40h40V0h2v40h40V0h2v83zm-2-1V42H84v40h40zM82 42H42v40h40V42zm-50-6a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm96 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm-42 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm30-12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM20 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm12 24a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM8 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM8 78a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm12 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm54 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM50 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM50 78a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm54-12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm12 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM92 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM92 78a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24-42a4 4 0 1 1 0-8 4 4 0 0 1 0 8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
   button#work2::before {
     background-color: #f7f5f9;
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 4), rgba(0, 165, 70, .6) ), url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23070707' fill-opacity='0.13' fill-rule='evenodd'/%3E%3C/svg%3E");
@@ -253,10 +320,6 @@ const FOEButton = styled.div`
     background-size: 50px;
   }
 
-  button:hover {
-    box-shadow: inset 2px 2px 4px rgba(0,0,0,.1),
-  }
-
   button:active {
     border-width: 0px;
     box-shadow: inset 2px 2px 4px rgba(0,0,0,.1),
@@ -280,7 +343,38 @@ const FOEButton = styled.div`
 
   button:focus {
     outline: none;
+    height: 135px;
+    width: 135px;
+    transition: height 0.4s linear, width 0.4s linear;
 
+    &::before {
+      height: 130vw;
+      width: 130vw;
+      transition: height 0.4s linear, width 0.4s linear;
+      opacity: .6;
+
+    }
+  }
+
+  .bg {
+
+    display: block;
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    background-color: black;
+    opacity: 0;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+    transition: .4s;
+    z-index: -10;
+  }
+  .bg:hover {
+    height: 130vw;
+    width: 130vw;
+    transition: height 0.4s linear, width 0.4s linear;
   }
 
 
@@ -291,17 +385,3 @@ const FOEButton = styled.div`
 
 
 
-
-const StyledSplashPage = styled.div`
-  postition: relative;
-  box-sizing(border-box);
-
-  .content{
-    z-index: 10;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    opacity: 0;
-  }
-
-`;

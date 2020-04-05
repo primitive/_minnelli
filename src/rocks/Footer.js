@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 //import { keyframes, Global } from '@emotion/core';
 import styled from '@emotion/styled'
-
-import settings from './settings';
-import primitivetext from './primitive.svg';
-import primitiveicon from './punkyicon.svg';
+import primitivetext from '../img/primitive.svg';
+//import primitiveicon from '../img/punkyicon.svg';
 
 
-  const Footer = () => {
+const Footer = () => {
 
   return (
     <StyledFooter>
 
-        <p>~ <a href="https://primitivedigital.co.uk" title="Website crafted by Primitive Digital">primitive digital</a> &amp; <a href="https://primitivehosting.uk" title="Wordpress, Linux and Windows Hosting">primitive hosting</a> | it's all about sme ~</p>
-        <Brand>
-          <a href="https://primitivedigital.co.uk" title="Website crafted by Primitive Digital">
-            <img src={primitivetext} alt="Website crafted by Primitive Digital" />
-          </a>
-        </Brand>
-        <p>~ <a href="https://sknow.it" title="Digital design and development contractor">sknow.it</a> ltd | enterprise consultancy ~</p>
-
+      <p>~ <a href="https://primitivedigital.co.uk" title="Website crafted by Primitive Digital">primitive digital</a> &amp; <a href="https://primitivehosting.uk" title="Wordpress, Linux and Windows Hosting">primitive hosting</a> | it's all about sme ~</p>
+      <Brand>
+        <a href="https://primitivedigital.co.uk" title="Website crafted by Primitive Digital">
+          <img src={primitivetext} alt="Website crafted by Primitive Digital" />
+        </a>
+      </Brand>
+      <p>~ <a href="https://sknow.it" title="Digital design and development contractor">sknow.it</a> ltd | enterprise consultancy ~</p>
 
     </StyledFooter>
   );
@@ -60,6 +57,7 @@ const StyledFooter = styled.footer`
     font-weight: 400;
   }
   @media screen and (max-width: 768px) {
+    position: relative;
     flex-wrap: wrap;
     line-height: 4rem;
 
