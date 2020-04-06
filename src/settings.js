@@ -1,12 +1,5 @@
 // config
 const settings = {
-    texttop: "New Site",
-    textbottom: "Coming Soon",
-    icontop: "",
-    iconbottom: "",
-    company1: "Shaun",
-    company2: "Knowles",
-
 
     buttoncolor: {
         "white": `background-image: linear-gradient(to right bottom, #dadfe1, #abb7b7 );
@@ -55,23 +48,23 @@ const settings = {
     profiles: {
         work: [
           { "id": "prof1", "label": "/sknow.it", "url": "https://sknow.it", "icon": "fas fa-globe", "title": "sknow.it - Digital Consultant" },
-          { "id": "prof2", "label": "/primitivedigital.co.uk", "url": "https://primitivedigital.co.uk", "icon": "fas fa-globe", "title": "Primitive Digital - end-to-end design and devlopment services for Startups, Charities and SMEs" },
+          { "id": "prof2", "label": "/primitivedigital.co.uk", "url": "https://primitivedigital.co.uk", "icon": "fas fa-globe active", "title": "Primitive Digital - end-to-end design and devlopment services for Startups, Charities and SMEs" },
           { "id": "prof3", "label": "/primitivehosting.uk", "url": "https://primitivehosting.uk", "icon": "fas fa-globe", "title": "Primitive Digital on LinkedIn" },
           { "id": "prof4", "label": "/primitivedigital", "url": "https://www.linkedin.com/company/primitive-web-design", "icon": "fa-linkedin", "title": "Primitive Digital on LinkedIn" },
           { "id": "prof5", "label": "/primitiveshaun", "url": "https://github.com/primitiveshaun", "icon": "fa-github", "title": "Primitive Shaun on Github" },
-          { "id": "prof6", "label": "/primitiveshaun", "url": "https://www.behance.net/primitiveshaun/", "icon": "fa-behance", "title": "Primitive Shaun on Behance" },
+          { "id": "prof6", "label": "/primitiveshaun", "url": "https://www.behance.net/primitiveshaun", "icon": "fa-behance", "title": "Primitive Shaun on Behance" },
           { "id": "prof7", "label": "/primitiveshaun", "url": "https://codepen.io/primitiveshaun", "icon": "fa-codepen", "title": "Primitive Shaun on Codepen" },
           { "id": "prof8", "label": "/primitivestuff", "url": "https://twitter.com/primitivestuff", "icon": "fa-twitter", "title": "Primitive Digital on Twitter" },
-          { "id": "prof9", "label": "/primitivedigital", "url": "https://www.instagram.com/primitivedigital/", "icon": "fa-instagram", "title": "Primitive Digital on Instagram" },
+          { "id": "prof9", "label": "/primitivedigital", "url": "https://www.instagram.com/primitivedigital", "icon": "fa-instagram", "title": "Primitive Digital on Instagram" },
           { "id": "prof10", "label": "/primitivedigital", "url": "https://www.facebook.com/primitivedigital", "icon": "fa-facebook", "title": "Primitive Digital on Facebook" }
     
     
         ],
         play: [
-          { "id": "soci1", "label": "/nice2b.me", "url": "https://nice2b.me/", "icon": "fa-globe", "title": "Nice2B.me - The Living Notebook" },
-          { "id": "soci2", "label": "/shaunknowles", "url": "https://www.linkedin.com/in/shaunknowles/", "icon": "fa-linkedin", "title": "Shaun Knowles on LinkedIn" },
+          { "id": "soci1", "label": "/nice2b.me", "url": "https://nice2b.me", "icon": "fas fa-globe active", "title": "Nice2B.me - The Living Notebook" },
+          { "id": "soci2", "label": "/shaunknowles", "url": "https://www.linkedin.com/in/shaunknowles", "icon": "fa-linkedin", "title": "Shaun Knowles on LinkedIn" },
           { "id": "soci3", "label": "/shaunknows", "url": "https://twitter.com/shaunknows", "icon": "fa-twitter", "title": "Shaun Knows on Twitter" },
-          { "id": "soci4", "label": "/nice2b.me", "url": "https://www.instagram.com/nice2b.me/", "icon": "fa-instagram", "title": "Nice2B.me on Instagram" }
+          { "id": "soci4", "label": "/nice2b.me", "url": "https://www.instagram.com/nice2b.me", "icon": "fa-instagram", "title": "Nice2B.me on Instagram" }
         ]
     
       }

@@ -4,8 +4,7 @@ import styled from '@emotion/styled'
 const Header = () => {
   return (
     <StyledHeader>
-      <p>me<sub>3</sub></p>
-
+      <Text>me<sup>3</sup></Text>
     </StyledHeader>
   );
 }
@@ -30,4 +29,18 @@ const StyledHeader = styled.header`
     font-size: 1rem;
     text-shadow: #fff 1px 1px 0;
   }
+`;
+
+const Text = styled.h1`
+  font-size: 2rem;
+  letter-spacing: 0px;
+  font-weight: 300;
+  opacity: .4;
+  text-shadow: #fff 1px 1px 0;
+  sup {
+    padding: 1.2px;
+    font-size: 1rem;
+    vertical-align:text-bottom;
+  }
+
 `;

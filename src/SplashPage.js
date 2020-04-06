@@ -21,9 +21,9 @@ function SplashPage() {
     { "id": "play4", "color": color.orange, "checked": false, "label": "Nice2B.me" }
   ];
 
-  
+
   const [mode, setMode] = useState('work');
-  const [buttons, setButtons] = useState(workbuttons);
+  const [buttons, setButtons] = useState(homebuttons.concat(workbuttons).concat(playbuttons));
 
   const profilelist = ('work' === mode) ? settings.profiles.work : settings.profiles.play;
 
@@ -33,25 +33,33 @@ function SplashPage() {
   }, [buttons]);
 
   const handleClick = (e) => {
-    //setDisplay(display.button.map(display.button => (display.button[id] === id ? { ...button, done } : button)));
-    
-    console.log('num= ' + e.substring(4));
-    console.log(buttons);
+
     const btnID = e;
-    const btnType = e.substring(0,4);
+    const btnType = e.substring(0, 4);
 
     console.log('btnID= ' + btnID);
 
-    if ('play'===btnType) {
-      setMode(btnType);
+    //setDisplay(e.map(button => (button[id] === e ? {checked: true} : button)));
+    /*
+    let obj = buttons.find(t => t.id === e);
+    if (obj) {
+      obj.checked = !obj.checked;
+      console.log(obj);
     }
-    else {
-      setMode('work');
-    }
+    */
 
-    //{ firstName: 'Jason' }
+    const _buttons = buttons;
+    _buttons.forEach((button) => {
+      if (button.id === btnID) { button.checked = !button.checked; }
+      else { button.checked = false; }
+    });
+    setButtons(_buttons);
 
 
+    //setButtons(e => (buttons.id === e ? {checked: true} : {checked: false}));
+
+    if ('play' === btnType) { setMode(btnType); }
+    else { setMode('work'); }
 
     /*
     handleClick = () => {
@@ -69,7 +77,7 @@ function SplashPage() {
     //setButtons(workbuttons);
   };
 
-
+  
   return (
     <StyledSplashPage>
 
@@ -77,15 +85,17 @@ function SplashPage() {
 
       <Container>
 
-      <Row>
+        <Row>
           {homebuttons && (
             homebuttons.map((button) => {
+              const isActive = button.checked ? 'active' : '';
               return (
                 <Col key={button.id}>
                   <FOEButton color={button.color}>
                     <button
                       onClick={({ target }) => handleClick(target.id)}
                       label={button.label}
+                      className={isActive}
                       id={button.id}>
                     </button>
                     <div className="bg"></div>
@@ -95,15 +105,17 @@ function SplashPage() {
           )}
         </Row>
 
-      <Row>
+        <Row>
           {workbuttons && (
             workbuttons.map((button) => {
+              const isActive = button.checked ? 'active' : '';
               return (
                 <Col key={button.id}>
                   <FOEButton color={button.color}>
                     <button
                       onClick={({ target }) => handleClick(target.id)}
                       label={button.label}
+                      className={isActive}
                       id={button.id}>
                     </button>
                     <div className="bg"></div>
@@ -116,12 +128,14 @@ function SplashPage() {
         <Row>
           {playbuttons && (
             playbuttons.map((button) => {
+              const isActive = button.checked ? 'active' : '';
               return (
                 <Col key={button.id}>
                   <FOEButton color={button.color}>
                     <button
                       onClick={({ target }) => handleClick(target.id)}
                       label={button.label}
+                      className={isActive}
                       id={button.id}>
                     </button>
                     <div className="bg"></div>
@@ -240,14 +254,18 @@ const Profiles = styled.div`
       border-bottom: 2px solid #fc0;
       transition: background-size .125s ease-in;
     }
-    a:hover {
+    a:hover,
+    a[href="https://primitivedigital.co.uk"],
+    a[href="https://nice2b.me"] {
       color: #2d2d2d;
       background-size: 100% 100%;
     }
   }
-  
 }
+
 `;
+
+
 
 
 
