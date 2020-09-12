@@ -48,7 +48,7 @@ const settings = {
     profiles: {
         work: [
           { "id": "prof1", "label": "/sknow.it", "url": "https://sknow.it", "icon": "fas fa-globe", "title": "sknow.it - Digital Consultant" },
-          { "id": "prof2", "label": "/primitivedigital.co.uk", "url": "https://primitivedigital.uk", "icon": "fas fa-globe active", "title": "Primitive Digital - end-to-end design and devlopment services for Startups, Charities and SMEs" },
+          { "id": "prof2", "label": "/primitivedigital.uk", "url": "https://primitivedigital.uk", "icon": "fas fa-globe active", "title": "Primitive Digital - end-to-end design and devlopment services for Startups, Charities and SMEs" },
           { "id": "prof3", "label": "/primitivehosting.uk", "url": "https://primitivehosting.uk", "icon": "fas fa-globe", "title": "Primitive Digital on LinkedIn" },
           { "id": "prof4", "label": "/primitivedigital", "url": "https://www.linkedin.com/company/primitive-web-design", "icon": "fa-linkedin", "title": "Primitive Digital on LinkedIn" },
           { "id": "prof5", "label": "/primitiveshaun", "url": "https://github.com/primitiveshaun", "icon": "fa-github", "title": "Primitive Shaun on Github" },
