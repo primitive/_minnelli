@@ -2,42 +2,42 @@
 const settings = {
 
     buttoncolor: {
-        "white": `background-image: linear-gradient(to right bottom, #dadfe1, #abb7b7 );
+        white: `background-image: linear-gradient(to right bottom, #dadfe1, #abb7b7 );
             button {
               background-image: linear-gradient(to right bottom, #dadfe1, #abb7b7 );
               &:active {
                 background-image: linear-gradient(to right bottom, #abb7b7, #dadfe1);
               }
         }`,
-        "green": `background-image: linear-gradient(to right bottom, #dadfe1, rgb(0, 165, 70));
+        green: `background-image: linear-gradient(to right bottom, #dadfe1, rgb(0, 165, 70));
             button {
               background-image: linear-gradient(to right bottom, #dadfe1, rgb(0, 165, 70) );
               &:active {
                 background-image: linear-gradient(to right bottom, #dadfe1, rgb(0, 165, 70)) );
               }
         }`,
-        "blue": `background-image: linear-gradient(to right bottom, #dadfe1, rgb(15, 82, 186) );
+        blue: `background-image: linear-gradient(to right bottom, #dadfe1, rgb(15, 82, 186) );
             button {
               background-image: linear-gradient(to right bottom, #dadfe1, rgb(15, 82, 186) );
               &:active {
                 background-image: linear-gradient(to right bottom, #dadfe1, rgb(15, 82, 186) );
               }
             }`,
-        "red": `background-image: linear-gradient(to right bottom, #dadfe1, rgb(202, 52, 51) );
+        red: `background-image: linear-gradient(to right bottom, #dadfe1, rgb(202, 52, 51) );
             button {
               background-image: linear-gradient(to right bottom, #dadfe1, rgb(202, 52, 51) );
               &:active {
                 background-image: linear-gradient(to right bottom, #dadfe1, rgb(202, 52, 51) );
               }
             }`,
-        "cyan": `background-image: linear-gradient(to right bottom, #dadfe1, rgb(0, 165, 186) );
+        cyan: `background-image: linear-gradient(to right bottom, #dadfe1, rgb(0, 165, 186) );
             button {
               background-image: linear-gradient(to right bottom, #dadfe1, rgb(0, 165, 186) );
               &:active {
                 background-image: linear-gradient(to right bottom, #dadfe1, rgb(0, 165, 186) );
               }
             }`,
-        "orange": `background-image: linear-gradient(to right bottom, #dadfe1, rgb(240, 94, 35) );
+        orange: `background-image: linear-gradient(to right bottom, #dadfe1, rgb(240, 94, 35) );
             button {
               background-image: linear-gradient(to right bottom, #dadfe1, rgb(240, 94, 35) );
               &:active {
@@ -48,7 +48,7 @@ const settings = {
     profiles: {
         work: [
           { "id": "prof1", "label": "/sknow.it", "url": "https://sknow.it", "icon": "fas fa-globe", "title": "sknow.it - Digital Consultant" },
-          { "id": "prof2", "label": "/primitivedigital.co.uk", "url": "https://primitivedigital.co.uk", "icon": "fas fa-globe active", "title": "Primitive Digital - end-to-end design and devlopment services for Startups, Charities and SMEs" },
+          { "id": "prof2", "label": "/primitivedigital.co.uk", "url": "https://primitivedigital.uk", "icon": "fas fa-globe active", "title": "Primitive Digital - end-to-end design and devlopment services for Startups, Charities and SMEs" },
           { "id": "prof3", "label": "/primitivehosting.uk", "url": "https://primitivehosting.uk", "icon": "fas fa-globe", "title": "Primitive Digital on LinkedIn" },
           { "id": "prof4", "label": "/primitivedigital", "url": "https://www.linkedin.com/company/primitive-web-design", "icon": "fa-linkedin", "title": "Primitive Digital on LinkedIn" },
           { "id": "prof5", "label": "/primitiveshaun", "url": "https://github.com/primitiveshaun", "icon": "fa-github", "title": "Primitive Shaun on Github" },
@@ -57,8 +57,6 @@ const settings = {
           { "id": "prof8", "label": "/primitivestuff", "url": "https://twitter.com/primitivestuff", "icon": "fa-twitter", "title": "Primitive Digital on Twitter" },
           { "id": "prof9", "label": "/primitivedigital", "url": "https://www.instagram.com/primitivedigital", "icon": "fa-instagram", "title": "Primitive Digital on Instagram" },
           { "id": "prof10", "label": "/primitivedigital", "url": "https://www.facebook.com/primitivedigital", "icon": "fa-facebook", "title": "Primitive Digital on Facebook" }
-    
-    
         ],
         play: [
           { "id": "soci1", "label": "/nice2b.me", "url": "https://nice2b.me", "icon": "fas fa-globe active", "title": "Nice2B.me - The Living Notebook" },
@@ -72,7 +70,6 @@ const settings = {
 
 
 // apple red - #E1623F" - rgba(225,98,63,.7)
-
 // mustard -  #ffdb58 / rgb(255,219,88,.7)
 // lime - #00FF00
 // teal - #008080 / rgba(0,128,128,.7)
