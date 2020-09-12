@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from '@emotion/styled';
 import Footer from './rocks/Footer.js';
 import Header from './rocks/Header.js';
+import Profiles from './rocks/Profiles.js';
 //import FOEButton from './rocks/FOEButton.js';
 
 import settings from './settings';
 import primitiveicon from './img/punkyicon.svg';
+import n2bicon from './img/n2b-pencil.svg';
+import sknowicon from './img/sknow.svg';
+
 
 function SplashPage() {
 
+  const homeRef = useRef(null);
   const color = settings.buttoncolor;
   const homebuttons = [
     { "id": "home1", "color": color.white, "checked": false, "label": "sknow.it" }
@@ -23,79 +28,111 @@ function SplashPage() {
 
 
   const [mode, setMode] = useState('work');
+  //const [buttons] = useState(homebuttons.concat(workbuttons).concat(playbuttons));
   const [buttons, setButtons] = useState(homebuttons.concat(workbuttons).concat(playbuttons));
+  const [active, setActive] = useState(buttons.map(a => a.checked));
 
-  const profilelist = ('work' === mode) ? settings.profiles.work : settings.profiles.play;
 
   useEffect(() => {
-    //setButtons(workbuttons);
     console.log(buttons);
-  }, [buttons]);
+    console.log(active);
+  }, [buttons, active]);
 
   const handleClick = (e) => {
 
-    const btnID = e;
-    const btnType = e.substring(0, 4);
+    const btnID = e.id;
+    const btnType = btnID.substring(0, 4);
+    const btnNo = Number(btnID.substring(4));
+    const idx = btnNo-1;
 
-    console.log('btnID= ' + btnID);
+    //debugger;
 
-    //setDisplay(e.map(button => (button[id] === e ? {checked: true} : button)));
-    /*
-    let obj = buttons.find(t => t.id === e);
-    if (obj) {
-      obj.checked = !obj.checked;
-      console.log(obj);
+    // if already active
+    if (active[idx]) {
+      //console.log(active[idx], ' has focus');
+
+      function setAll(a, v) {
+        var i, n = a.length;
+        for (i = 0; i < n; ++i) { a[i] = v; }
+      }
+      let _active = active;
+      setAll(_active, false);
+      setActive(_active);
+
+      const _buttons = buttons;
+      _buttons.forEach((button) => {
+        button.checked = false;
+      });
+      setButtons(_buttons);
+
+      homeRef.current.focus();
     }
-    */
+    else {
+      
+      console.log('new focus'); 
 
-    const _buttons = buttons;
-    _buttons.forEach((button) => {
-      if (button.id === btnID) { button.checked = !button.checked; }
-      else { button.checked = false; }
-    });
-    setButtons(_buttons);
+      const _buttons = buttons;
+      _buttons.forEach((button) => {
+        if (button.id === btnID) { button.checked = !button.checked; }
+        else { button.checked = false; }
+      });
+      setButtons(_buttons);
+
+      function toggleActive(item, index, arr) {
+        const btn = index + 1;
+        if (btn === btnNo) { arr[index] = true }
+        else { arr[index] = false }
+      }
+      let _active = active;
+      _active.forEach(toggleActive);
+      setActive(_active);
+  }
 
 
-    //setButtons(e => (buttons.id === e ? {checked: true} : {checked: false}));
-
+    // set profile list display
     if ('play' === btnType) { setMode(btnType); }
     else { setMode('work'); }
 
-    /*
-    handleClick = () => {
-      this.setState((prevState) => ({
-        counter: prevState.counter + 1
-      }));
-    };
-    
-
-        prevState => ({
-      [name]: !prevState[name]
-    }),
-
-    */
-    //setButtons(workbuttons);
   };
 
-  
+  const handleBlur = (e) => {
+
+
+
+  };
+
+  const homebtns = buttons.slice(0, 1),
+    workbtns = buttons.slice(1, 3),
+    playbtns = buttons.slice(3);
+
+  const profilelist = ('work' === mode) ? settings.profiles.work : settings.profiles.play;
+
+  /*
+  const checkState = (btnID) => {
+    const check = Number(btnID.substring(4) - 1);
+    console.log(check);
+    return active[check] ? 'active' : '';
+  }
+  */
+
+
   return (
     <StyledSplashPage>
 
-      <Header />
+      <Header/>
+      <Input type='text' ref={homeRef} readOnly></Input>
 
       <Container>
 
         <Row>
-          {homebuttons && (
-            homebuttons.map((button) => {
-              const isActive = button.checked ? 'active' : '';
+          {homebtns && (
+            homebtns.map((button) => {
               return (
                 <Col key={button.id}>
                   <FOEButton color={button.color}>
                     <button
-                      onClick={({ target }) => handleClick(target.id)}
+                      onClick={({ target }) => handleClick(target)}
                       label={button.label}
-                      className={isActive}
                       id={button.id}>
                     </button>
                     <div className="bg"></div>
@@ -106,19 +143,17 @@ function SplashPage() {
         </Row>
 
         <Row>
-          {workbuttons && (
-            workbuttons.map((button) => {
-              const isActive = button.checked ? 'active' : '';
+          {workbtns && (
+            workbtns.map((button) => {
               return (
                 <Col key={button.id}>
                   <FOEButton color={button.color}>
                     <button
-                      onClick={({ target }) => handleClick(target.id)}
+                      onClick={({ target }) => handleClick(target)}
+                      //onBlur={({ target }) => handleBlur(target)}
                       label={button.label}
-                      className={isActive}
                       id={button.id}>
                     </button>
-                    <div className="bg"></div>
                   </FOEButton>
                 </Col>);
             })
@@ -126,19 +161,16 @@ function SplashPage() {
         </Row>
 
         <Row>
-          {playbuttons && (
-            playbuttons.map((button) => {
-              const isActive = button.checked ? 'active' : '';
+          {playbtns && (
+            playbtns.map((button) => {
               return (
                 <Col key={button.id}>
                   <FOEButton color={button.color}>
                     <button
-                      onClick={({ target }) => handleClick(target.id)}
+                      onClick={({ target }) => handleClick(target)}
                       label={button.label}
-                      className={isActive}
                       id={button.id}>
                     </button>
-                    <div className="bg"></div>
                   </FOEButton>
                 </Col>);
             })
@@ -146,22 +178,7 @@ function SplashPage() {
         </Row>
       </Container>
 
-      <Profiles>
-        {profilelist && (
-          profilelist.map((profile) => {
-            return (
-              <div
-                key={profile.id}
-                className="profile"
-              >
-                <i className={"fab " + profile.icon}></i>
-                <p className="author">
-                  <a href={profile.url} title={profile.title} rel="noopener noreferrer" target="_blank">{profile.label}</a>
-                </p>
-              </div>);
-          })
-        )}
-      </Profiles>
+      <Profiles props={profilelist}></Profiles>
 
       <Footer />
 
@@ -203,67 +220,26 @@ const Row = styled.div`
 const Col = styled.div`
   padding: 10px;
 `;
+const Input = styled.input`
+  display: block;
+  margin: -4rem auto 2rem;
+  width: 5rem;
+  height: 5rem;
+  background: none;
+  border: 2px solid #efefef;
+  border-radius: 5rem;
+  z-index: -1;
 
-
-
-
-
-
-
-
-
-
-
-
-const Profiles = styled.div`
-  padding: 1.5rem;
-  position: relative;
-  z-index: 4;
-
-  @media screen and (min-width: 768px) {
-    position: absolute;
-    top: .5rem;
-    left: 1.5rem;
-    z-index: 3;
+  &:focus {
+    border: 2px double #ccc;
+    outline: none;
   }
-
-.profile {
-  color: #a2a2a2;
-  display: flex;
-  align-items: center;
-  font-size: 1rem;
-  text-shadow: #fff 1px 1px 0;
-  
-  .fab, .fas { margin-right: .5rem; }
-  
-  .author {
-    a,
-    a:link,
-    a:visited {
-      color: #a2a2a2;
-      padding: 2px 3px;
-      text-transform: uppercase;
-      font-size: .9rem;
-      letter-spacing: 2px;
-      font-weight: 400;
-      text-decoration: none;
-      background-image: linear-gradient(120deg, #fc0 0%, #fc0 100%);
-      background-position: 0 100%;
-      background-repeat: no-repeat;
-      background-size: 100% 0;
-      border-bottom: 2px solid #fc0;
-      transition: background-size .125s ease-in;
-    }
-    a:hover,
-    a[href="https://primitivedigital.co.uk"],
-    a[href="https://nice2b.me"] {
-      color: #2d2d2d;
-      background-size: 100% 100%;
-    }
-  }
-}
-
 `;
+
+
+
+
+
 
 
 
@@ -338,7 +314,23 @@ const FOEButton = styled.div`
     background-size: 50px;
   }
 
-  button:active {
+  button#home1::after {
+    background-image: url(${sknowicon});
+    background-size: 65px;
+  }
+  button:focus#home1::after {
+    background-size: 75px;
+  }
+  button#play4::after {
+    background-image: url(${n2bicon});
+    background-size: 50px;
+    opacity: .7;
+  }
+  button:focus#play4::after {
+    background-size: 60px;
+  }
+
+  button:focus {
     border-width: 0px;
     box-shadow: inset 2px 2px 4px rgba(0,0,0,.1),
     inset -2px -2px 4px rgba(255, 255,255, .4);
@@ -352,9 +344,6 @@ const FOEButton = styled.div`
     }
 
     &::after {
-      background-image: url(${primitiveicon});
-      background-position: center;
-      background-repeat: no-repeat;
       background-size: 70px;
     }
   }
@@ -370,9 +359,9 @@ const FOEButton = styled.div`
       width: 130vw;
       transition: height 0.4s linear, width 0.4s linear;
       opacity: .6;
-
     }
   }
+
 
   .bg {
 
