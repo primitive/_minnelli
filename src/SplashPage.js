@@ -43,9 +43,9 @@ function SplashPage() {
   });
   */
   
-
   const [active, setActive] = useState(buttons.map(a => a.checked));
-  // work around: look at setReducer
+ 
+  // rerender work around: look at setReducer
   // https://reactjs.org/docs/hooks-reference.html#useeffect
   const [trigger, setTrigger] = useState(false);
 
