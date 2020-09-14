@@ -34,6 +34,7 @@ const StyledHeader = styled.header`
 const Text = styled.h1`
   font-size: 2rem;
   letter-spacing: 0px;
+  line-height: 1rem;
   font-weight: 300;
   opacity: .4;
   text-shadow: #fff 1px 1px 0;
