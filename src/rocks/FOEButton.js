@@ -7,7 +7,7 @@ import primitiveicon from '../img/punkyicon.svg';
 const FOEButton = (props) => {
 
   return (
-    <StyledFOEButton color={props.color}>
+    <StyledFOEButton color={props.color} className={props.checked}>
         {props.children}
         <div className="bg"></div>
     </StyledFOEButton>
@@ -37,6 +37,7 @@ const StyledFOEButton = styled.div`
     border-radius: 50px;
     box-shadow: inset 2px 4px 4px -2px rgba(255, 255, 255, .6),
       0px 4px 4px rgba(0,0,0,.2);
+    outline: none;
     z-index: 10;
   }
   button::before {
@@ -65,44 +66,7 @@ const StyledFOEButton = styled.div`
     background-position: center;
     background-repeat: no-repeat;
     background-size: 50px;
-  }
-
-  button:active {
-    border-width: 0px;
-    box-shadow: inset 2px 2px 4px rgba(0,0,0,.1),
-    inset -2px -2px 4px rgba(255, 255,255, .4);
-
-    &::before {
-      height: 130vw;
-      width: 130vw;
-      transition: height 0.4s linear, width 0.4s linear;
-      opacity: .6;
-
-      //sm
-      @media screen and (min-width: 768px) {
-        height: 130vw;
-        width: 130vw;
-      }
-
-    }
-
-    &::after {
-      background-size: 70px;
-    }
-  }
-
-  button:focus {
-    outline: none;
-    height: 135px;
-    width: 135px;
-    transition: height 0.4s linear, width 0.4s linear;
-
-    &::before {
-      height: 130vw;
-      width: 130vw;
-      transition: height 0.4s linear, width 0.4s linear;
-      opacity: .6;
-    }
+    transition: background-size 100ms ease-in-out;
   }
 
   .bg {
@@ -119,11 +83,7 @@ const StyledFOEButton = styled.div`
     transition: .4s;
     z-index: -10;
   }
-  .bg:hover {
-    height: 130vw;
-    width: 130vw;
-    transition: height 0.4s linear, width 0.4s linear;
-  }
+
 
 
   ${props => props.color}
