@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import styled from '@emotion/styled';
 import Footer from './rocks/Footer.js';
 import Header from './rocks/Header.js';
@@ -34,15 +34,20 @@ function SplashPage() {
 
 
   const [mode, setMode] = useState('work');
-  //const [buttons] = useState(homebuttons.concat(workbuttons).concat(playbuttons));
   const [buttons, setButtons] = useState(homebuttons.concat(workbuttons).concat(playbuttons));
+
+  /*
+  const [buttons, setButtons] = useState(() => {
+    const initialState = homebuttons.concat(workbuttons).concat(playbuttons);
+    return initialState;
+  });
+  */
+  
+
   const [active, setActive] = useState(buttons.map(a => a.checked));
-
-
-  useEffect(() => {
-    console.log(buttons);
-    console.log(active);
-  }, [buttons, active]);
+  // work around: look at setReducer
+  // https://reactjs.org/docs/hooks-reference.html#useeffect
+  const [trigger, setTrigger] = useState(false);
 
   const handleClick = (e) => {
 
@@ -96,11 +101,7 @@ function SplashPage() {
     if ('play' === btnType) { setMode(btnType); }
     else { setMode('work'); }
 
-  };
-
-  const handleBlur = (e) => {
-
-    console.log('blur'); 
+    setTrigger(!trigger);
 
   };
 
@@ -109,15 +110,6 @@ function SplashPage() {
     playbtns = buttons.slice(3);
 
   const profilelist = ('work' === mode) ? settings.profiles.work : settings.profiles.play;
-
-  /*
-  const checkState = (btnID) => {
-    const check = Number(btnID.substring(4) - 1);
-    console.log(check);
-    return active[check] ? 'active' : '';
-  }
-  */
-
 
   return (
     <StyledSplashPage>
@@ -135,16 +127,14 @@ function SplashPage() {
                 <Col key={button.id}>
                   <FOEButton
                       color={button.color}
-                      //icon={button.icon}
+                      checked={button.checked}
                     >
-                  <button
-                    id={button.id}
-                    label={button.label}
-                    checked={button.checked}
-                    onClick={({ target }) => handleClick(target)}
-                    onBlur={({ target }) => handleBlur(target)}
-                    >
-                  </button>
+                    <button
+                      id={button.id}
+                      label={button.label}
+                      onClick={({ target }) => handleClick(target)}
+                      >
+                    </button>
                   </FOEButton>
                 </Col>);
             })
@@ -158,13 +148,12 @@ function SplashPage() {
                 <Col key={button.id}>
                   <FOEButton
                       color={button.color}
+                      checked={button.checked}
                     >
                     <button
                       id={button.id}
                       label={button.label}
-                      checked={button.checked}
                       onClick={({ target }) => handleClick(target)}
-                      onBlur={({ target }) => handleBlur(target)}
                       >
                     </button>
                   </FOEButton>
@@ -180,13 +169,12 @@ function SplashPage() {
                 <Col key={button.id}>
                   <FOEButton
                     color={button.color}
+                    checked={button.checked}
                     >
                     <button
                       id={button.id}
                       label={button.label}
-                      checked={button.checked}
                       onClick={({ target }) => handleClick(target)}
-                      onBlur={({ target }) => handleBlur(target)}
                       >
                     </button>
                   </FOEButton>
@@ -223,6 +211,39 @@ const StyledSplashPage = styled.div`
     opacity: 0;
   }
 
+  .true button {
+    height: 135px;
+    width: 135px;
+    border-width: 0px;
+    box-shadow: inset 2px 2px 4px rgba(0,0,0,.1),
+    inset -2px -2px 4px rgba(255, 255,255, .4);
+    transition: height 0.4s linear, width 0.4s linear;
+
+    &::before {
+      height: 130vw;
+      width: 130vw;
+      transition: height 0.4s linear, width 0.4s linear;
+      opacity: .6;
+
+      //sm
+      @media screen and (min-width: 768px) {
+        height: 130vw;
+        width: 130vw;
+      }
+
+    }
+
+    &::after {
+      background-size: 65px;
+    }
+  }
+
+  .true .bg {
+    height: 130vw;
+    width: 130vw;
+    transition: height 0.4s linear, width 0.4s linear;
+  }
+
   button#work1::before {
     background-color: #fbf1f3;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='126' height='84' viewBox='0 0 126 84'%3E%3Cg fill-rule='evenodd'%3E%3Cg fill='%231e0d10' fill-opacity='0.06'%3E%3Cpath d='M126 83v1H0v-2h40V42H0v-2h40V0h2v40h40V0h2v40h40V0h2v83zm-2-1V42H84v40h40zM82 42H42v40h40V42zm-50-6a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM8 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm96 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm-42 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm30-12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM20 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm12 24a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM8 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM8 78a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm12 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm54 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM50 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM50 78a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm54-12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm12 12a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM92 54a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24 0a4 4 0 1 1 0-8 4 4 0 0 1 0 8zM92 78a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm24-42a4 4 0 1 1 0-8 4 4 0 0 1 0 8z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
@@ -240,11 +261,15 @@ const StyledSplashPage = styled.div`
     background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 64 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M8 16c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zm33.414-6l5.95-5.95L45.95.636 40 6.586 34.05.636 32.636 2.05 38.586 8l-5.95 5.95 1.414 1.414L40 9.414l5.95 5.95 1.414-1.414L41.414 8zM40 48c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8zm0-2c3.314 0 6-2.686 6-6s-2.686-6-6-6-6 2.686-6 6 2.686 6 6 6zM9.414 40l5.95-5.95-1.414-1.414L8 38.586l-5.95-5.95L.636 34.05 6.586 40l-5.95 5.95 1.414 1.414L8 41.414l5.95 5.95 1.414-1.414L9.414 40z' fill='%230f52ba' fill-opacity='0.08' fill-rule='evenodd'/%3E%3C/svg%3E");
   }
 
+  button:active::after {
+    background-size: 69px;
+  }
+
   button#home1::after {
     background-image: url(${sknowicon});
-    background-size: 65px;
+    background-size: 69px;
   }
-  button:focus#home1::after {
+  button:active#home1::after {
     background-size: 75px;
   }
   button#play4::after {
@@ -252,7 +277,7 @@ const StyledSplashPage = styled.div`
     background-size: 50px;
     opacity: .7;
   }
-  button:focus#play4::after {
+  button:active#play4::after {
     background-size: 60px;
   }
 `;
