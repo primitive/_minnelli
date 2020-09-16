@@ -1,8 +1,7 @@
 import React from 'react';
 
 import styled from '@emotion/styled'
-
-
+import primitivetext from '../img/primitive.svg';
 
 const Footer = () => {
 
@@ -10,11 +9,13 @@ const Footer = () => {
     <StyledFooter>
 
       <p>~ <a href="https://primitivedigital.uk" title="Website crafted by Primitive Digital">primitive digital</a> &amp; <a href="https://primitivehosting.uk" title="Wordpress, Linux and Windows Hosting">primitive hosting</a> | it's all about sme ~</p>
+      
       <Brand>
         <a href="https://primitivedigital.uk" title="Website crafted by Primitive Digital">
-          <img src="https://shaunknowles.uk/wp-content/themes/shaunknowles/build/static/media/primitive.bc19edb5.svg" alt="Website crafted by Primitive Digital" />
+          <img src={primitivetext} alt="Website crafted by Primitive Digital" />
         </a>
       </Brand>
+
       <p>~ <a href="https://sknow.it" title="Digital design and development contractor">sknow.it</a> ltd | enterprise consultancy ~</p>
 
     </StyledFooter>
